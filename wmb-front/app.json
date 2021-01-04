@@ -1,0 +1,12 @@
+{
+  "name": "wmb-front",
+  "displayName": "wmb-front",
+  "expo": {
+    "name": "wmb-front",
+    "slug": "wmb-front",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
