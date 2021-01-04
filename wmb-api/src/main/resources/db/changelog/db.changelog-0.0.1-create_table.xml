@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <!-- Création des tables -->
+    <changeSet author="alexis" id="1">
+        <createTable tableName="UTILISATEUR" remarks="Table regroupant les utilisateurs">
+            <column name="ID_UTILISATEUR" type="NUMBER(8, 0)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="IDENTIFIANT" type="VARCHAR(50)"/>
+            <column name="EMAIL" type="VARCHAR(200)"/>
+            <column name="MOTDEPASSE" type="VARCHAR(500)"/>
+        </createTable>
+
+        <createIndex tableName="UTILISATEUR" indexName="IDX_PK_UTILISATEUR" unique="true">
+            <column name="ID_UTILISATEUR"/>
+        </createIndex>
+        <addPrimaryKey tableName="UTILISATEUR" columnNames="ID_UTILISATEUR" constraintName="PK_UTILISATEUR"/>
+
+        <createTable tableName="ACCOUNT" remarks="Table décrivant un compte bancaire">
+            <column name="ID_ACCOUNT" type="NUMBER(8, 0)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LIBELLE" type="VARCHAR(50)"/>
+            <column name="SOLDE" type="NUMBER(10, 2)"/>
+            <column name="ID_UTILISATEUR" type="NUMBER(8, 0)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createIndex tableName="ACCOUNT" indexName="IDX_PK_ACCOUNT" unique="true">
+            <column name="ID_ACCOUNT"/>
+        </createIndex>
+        <addPrimaryKey tableName="ACCOUNT" columnNames="ID_ACCOUNT" constraintName="PK_ACCOUNT"/>
+
+        <createTable tableName="OPERATION">
+            <column name="ID_OPERATION" type="NUMBER(8, 0)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LIBELLE" type="VARCHAR(50)"/>
+            <column name="SOLDE" type="NUMBER(10, 2)"/>
+            <column name="ID_ACCOUNT" type="NUMBER(8, 0)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createIndex tableName="OPERATION" indexName="IDX_PK_OPERATION" unique="true">
+            <column name="ID_OPERATION"/>
+        </createIndex>
+        <addPrimaryKey tableName="OPERATION" columnNames="ID_OPERATION" constraintName="PK_OPERATION"/>
+    </changeSet>
+
+    <!-- Création de clés étrangères/séquences/indexes -->
+    <changeSet id="2" author="alexis">
+
+        <createIndex indexName="IDX_FK_UTILISATEUR"
+                     tableName="ACCOUNT">
+            <column name="ID_UTILISATEUR"/>
+        </createIndex>
+
+        <createIndex indexName="IDX_FK_OPERATION"
+                     tableName="OPERATION">
+            <column name="ID_ACCOUNT"/>
+        </createIndex>
+
+        <addForeignKeyConstraint baseColumnNames="ID_UTILISATEUR"
+                                 baseTableName="ACCOUNT"
+                                 constraintName="FK_ACCOUNT_UTILISATEUR"
+                                 onDelete="RESTRICT"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="ID_UTILISATEUR"
+                                 referencedTableName="UTILISATEUR"/>
+
+        <addForeignKeyConstraint baseColumnNames="ID_ACCOUNT"
+                                 baseTableName="OPERATION"
+                                 constraintName="FK_OPERATION_ACCOUNT"
+                                 onDelete="RESTRICT"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="ID_ACCOUNT"
+                                 referencedTableName="ACCOUNT"/>
+
+        <createSequence sequenceName="SEQ_UTILISATEUR" cacheSize="0" cycle="false"
+                        incrementBy="1" maxValue="99999999999" minValue="1"
+                        ordered="false" startValue="173"/>
+
+        <createSequence sequenceName="SEQ_ACCOUNT" cacheSize="0" cycle="false"
+                        incrementBy="1" maxValue="99999999999" minValue="1"
+                        ordered="false" startValue="4"/>
+
+        <createSequence sequenceName="SEQ_OPERATION" cacheSize="0" cycle="false"
+                        incrementBy="1" maxValue="99999999999" minValue="1"
+                        ordered="false" startValue="29"/>
+    </changeSet>
+</databaseChangeLog>

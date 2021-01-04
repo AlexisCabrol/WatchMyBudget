@@ -2,6 +2,11 @@
 .idea/
 # Compiled class file
 *.class
+wmb-api/src/main/resources/application.properties
+target/
+*.iml
+wmb-api/WatchMyBudget.iml
+wmb-api/target
 
 # Log file
 *.log
