@@ -4,6 +4,7 @@
 *.class
 wmb-api/src/main/resources/application.properties
 target/
+./wmb-api/target
 *.iml
 wmb-api/WatchMyBudget.iml
 wmb-api/target
