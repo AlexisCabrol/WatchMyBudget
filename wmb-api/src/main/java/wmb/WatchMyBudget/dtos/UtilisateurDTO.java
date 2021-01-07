@@ -12,5 +12,6 @@ import java.io.Serializable;
 public class UtilisateurDTO implements Serializable {
     private String email;
     private String identifiant;
+    private String motDePasse;
     private String tokenJWT;
 }

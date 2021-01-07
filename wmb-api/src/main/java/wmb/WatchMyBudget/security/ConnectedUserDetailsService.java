@@ -32,7 +32,7 @@ public class ConnectedUserDetailsService implements UserDetailsService {
         if (utilisateurCourant == null) {
             throw new UsernameNotFoundException(identifiant);
         }
-        return new User(utilisateurCourant.getEmail(), utilisateurCourant.getMotDePasse(), Collections.emptyList());
+        return new User(utilisateurCourant.getIdentifiant(), utilisateurCourant.getMotDePasse(), Collections.emptyList());
     }
 
     public Utilisateur getUtilisateurCourant() {

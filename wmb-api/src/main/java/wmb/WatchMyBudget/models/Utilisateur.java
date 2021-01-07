@@ -16,8 +16,7 @@ import java.util.List;
 public class Utilisateur implements Serializable {
 
     @Id
-    @SequenceGenerator(name = "SEQ_UTILISATEUR", sequenceName = "SEQ_UTILISATEUR", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_UTILISATEUR")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_UTILISATEUR")
     private Integer id;
 

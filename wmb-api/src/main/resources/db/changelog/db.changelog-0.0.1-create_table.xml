@@ -8,50 +8,35 @@
     <!-- Création des tables -->
     <changeSet author="alexis" id="1">
         <createTable tableName="UTILISATEUR" remarks="Table regroupant les utilisateurs">
-            <column name="ID_UTILISATEUR" type="NUMBER(8, 0)">
-                <constraints nullable="false"/>
+            <column name="ID_UTILISATEUR" autoIncrement="true" type="int">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_UTILISATEUR"/>
             </column>
             <column name="IDENTIFIANT" type="VARCHAR(50)"/>
             <column name="EMAIL" type="VARCHAR(200)"/>
             <column name="MOTDEPASSE" type="VARCHAR(500)"/>
         </createTable>
 
-        <createIndex tableName="UTILISATEUR" indexName="IDX_PK_UTILISATEUR" unique="true">
-            <column name="ID_UTILISATEUR"/>
-        </createIndex>
-        <addPrimaryKey tableName="UTILISATEUR" columnNames="ID_UTILISATEUR" constraintName="PK_UTILISATEUR"/>
-
         <createTable tableName="ACCOUNT" remarks="Table décrivant un compte bancaire">
-            <column name="ID_ACCOUNT" type="NUMBER(8, 0)">
-                <constraints nullable="false"/>
+            <column name="ID_ACCOUNT" autoIncrement="true" type="int">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_ACCOUNT"/>
             </column>
             <column name="LIBELLE" type="VARCHAR(50)"/>
             <column name="SOLDE" type="NUMBER(10, 2)"/>
-            <column name="ID_UTILISATEUR" type="NUMBER(8, 0)">
+            <column name="ID_UTILISATEUR" type="int">
                 <constraints nullable="false"/>
             </column>
         </createTable>
-
-        <createIndex tableName="ACCOUNT" indexName="IDX_PK_ACCOUNT" unique="true">
-            <column name="ID_ACCOUNT"/>
-        </createIndex>
-        <addPrimaryKey tableName="ACCOUNT" columnNames="ID_ACCOUNT" constraintName="PK_ACCOUNT"/>
 
         <createTable tableName="OPERATION">
-            <column name="ID_OPERATION" type="NUMBER(8, 0)">
-                <constraints nullable="false"/>
+            <column name="ID_OPERATION" autoIncrement="true" type="int">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_OPERATION"/>
             </column>
             <column name="LIBELLE" type="VARCHAR(50)"/>
             <column name="SOLDE" type="NUMBER(10, 2)"/>
-            <column name="ID_ACCOUNT" type="NUMBER(8, 0)">
+            <column name="ID_ACCOUNT" type="int">
                 <constraints nullable="false"/>
             </column>
         </createTable>
-
-        <createIndex tableName="OPERATION" indexName="IDX_PK_OPERATION" unique="true">
-            <column name="ID_OPERATION"/>
-        </createIndex>
-        <addPrimaryKey tableName="OPERATION" columnNames="ID_OPERATION" constraintName="PK_OPERATION"/>
     </changeSet>
 
     <!-- Création de clés étrangères/séquences/indexes -->
@@ -82,17 +67,5 @@
                                  onUpdate="RESTRICT"
                                  referencedColumnNames="ID_ACCOUNT"
                                  referencedTableName="ACCOUNT"/>
-
-        <createSequence sequenceName="SEQ_UTILISATEUR" cacheSize="0" cycle="false"
-                        incrementBy="1" maxValue="99999999999" minValue="1"
-                        ordered="false" startValue="173"/>
-
-        <createSequence sequenceName="SEQ_ACCOUNT" cacheSize="0" cycle="false"
-                        incrementBy="1" maxValue="99999999999" minValue="1"
-                        ordered="false" startValue="4"/>
-
-        <createSequence sequenceName="SEQ_OPERATION" cacheSize="0" cycle="false"
-                        incrementBy="1" maxValue="99999999999" minValue="1"
-                        ordered="false" startValue="29"/>
     </changeSet>
 </databaseChangeLog>

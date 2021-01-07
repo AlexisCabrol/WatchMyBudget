@@ -17,8 +17,7 @@ import java.util.List;
 public class Account implements Serializable {
 
     @Id
-    @SequenceGenerator(name = "SEQ_ACCOUNT", sequenceName = "SEQ_ACCOUNT", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_ACCOUNT")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_ACCOUNT")
     private Integer id;
 

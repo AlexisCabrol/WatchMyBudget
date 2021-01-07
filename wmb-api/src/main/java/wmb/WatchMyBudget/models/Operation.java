@@ -16,8 +16,7 @@ import java.math.BigDecimal;
 public class Operation implements Serializable {
 
     @Id
-    @SequenceGenerator(name = "SEQ_OPERATION", sequenceName = "SEQ_OPERATION", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_OPERATION")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_OPERATION")
     private Integer id;
 
